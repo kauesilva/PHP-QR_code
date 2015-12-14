@@ -2,11 +2,28 @@
 //inclusão da biblioteca
 include('phpqrcode/qrlib.php');
 
-//variaveis obtidas do formulario
-$conteudo = $_POST['conteudo'];
-$nome = $_POST['nome'].".png";
-$tipo = $_POST['tipo'];
-$tamanho = $_POST['tamanho'];
+//variaveis
+$conteudo = "";
+$nome = "";
+$tipo = "";
+$tamanho = "";
+
+
+if (isset($_POST['conteudo'])) {
+		$conteudo = $_POST['conteudo'];
+	}
+
+if (isset($_POST['nome'])) {
+		$nome = $_POST['nome'];
+	}
+
+if (isset($_POST['tipo'])) {
+		$tipo = $_POST['tipo'];
+	}
+	
+if (isset($_POST['tamanho'])) {
+		$tamanho = $_POST['tamanho'];
+	}
 
 //caso não defina um tamanho o padrão é 5
 if($tamanho == ""){
@@ -50,4 +67,10 @@ QRcode::png(@$conteudo, @$nome, @$tipo, @$tamanho);
 	<input type="submit">
 </form>
 
-<img src="<?php echo $nome; ?>"> 
+<?php
+	if($nome == ""){
+		echo "";
+	}else{
+		echo"<img src=".$nome.">";
+	} 
+?> 
